@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advance/core/routing/routes.dart';
 import 'package:flutter_advance/features/onboarding/onboarding_screen.dart';
 
-import '../../features/auth/ui/widgets/login_screen.dart';
+import '../../features/auth/ui/login_screen.dart';
 class AppRouter {
   Route generateRoute(RouteSettings settings) {
     switch (settings.name) {

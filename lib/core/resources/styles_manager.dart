@@ -66,3 +66,18 @@ TextStyle getBoldTextStyle({
     height
   );
 }
+
+TextStyle getSemiBoldTextStyle({
+  required double fontSize,
+  required Color color,
+  TextDecoration decoration = TextDecoration.none,
+  double height = 0.0,
+}) {
+  return _getTextStyle(
+      fontSize,
+      ManagerFontWeight.semiBold,
+      color,
+      decoration,
+      height
+  );
+}
