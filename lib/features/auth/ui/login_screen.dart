@@ -4,12 +4,11 @@ import 'package:flutter_advance/core/resources/fonts_manager.dart';
 import 'package:flutter_advance/core/resources/sizes_manager.dart';
 import 'package:flutter_advance/core/resources/styles_manager.dart';
 import 'package:flutter_advance/core/widgets/app_text_button.dart';
-import 'package:flutter_advance/features/auth/data/models/login_request_body.dart';
 import 'package:flutter_advance/features/auth/logic/login_cubit.dart';
-import 'package:flutter_advance/features/auth/ui/widgets/already_have_account_text.dart';
-import 'package:flutter_advance/features/auth/ui/widgets/email_and_password.dart';
-import 'package:flutter_advance/features/auth/ui/widgets/login_bloc_listener.dart';
-import 'package:flutter_advance/features/auth/ui/widgets/terms_and_conditions_text.dart';
+import 'package:flutter_advance/features/auth/ui/widgets/login/dont_have_account_text.dart';
+import 'package:flutter_advance/features/auth/ui/widgets/login/email_and_password.dart';
+import 'package:flutter_advance/features/auth/ui/widgets/login/login_bloc_listener.dart';
+import 'package:flutter_advance/features/auth/ui/widgets/login/terms_and_conditions_text.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -57,7 +56,7 @@ class LoginScreen extends StatelessWidget {
                     SizedBox(height: HeightManager.h16,),
                     const TermsAndConditionsText(),
                     SizedBox(height: HeightManager.h60,),
-                    const AlreadyHaveAccountText(),
+                    const DontHaveAccountText(),
                     const LoginBlocListener(),
                   ],
                 ),

@@ -3,24 +3,24 @@ import 'package:flutter_advance/core/helpers/extensions.dart';
 import 'package:flutter_advance/core/resources/colors_manager.dart';
 import 'package:flutter_advance/core/resources/fonts_manager.dart';
 import 'package:flutter_advance/core/resources/styles_manager.dart';
-import 'package:flutter_advance/features/auth/logic/login_cubit.dart';
-import 'package:flutter_advance/features/auth/logic/login_state.dart';
+import 'package:flutter_advance/core/routing/routes.dart';
+import 'package:flutter_advance/features/auth/logic/sign_up_cubit.dart';
+import 'package:flutter_advance/features/auth/logic/sign_up_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/routing/routes.dart';
 
-
-class LoginBlocListener extends StatelessWidget {
-  const LoginBlocListener({super.key});
+class SignupBlocListener extends StatelessWidget {
+  const SignupBlocListener({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginCubit, LoginState>(
+    return BlocListener<SignupCubit, SignupState>(
       listenWhen: (previous, current) =>
-      current is Loading || current is Success || current is Error,
+      current is SignupLoading ||
+          current is SignupSuccess ||
+          current is SignupError,
       listener: (context, state) {
-        // whenOrNull is a custom extension method that we created by freezed library.
         state.whenOrNull(
-          loading: () {
+          signupLoading: () {
             showDialog(
               context: context,
               builder: (context) => const Center(
@@ -30,17 +30,47 @@ class LoginBlocListener extends StatelessWidget {
               ),
             );
           },
-          success: (loginResponse) {
+          signupSuccess: (signupResponse) {
             context.pop();
-            context.pushNamed(Routes.homeScreen);
+            showSuccessDialog(context);
           },
-          error: (error) {
+          signupError: (error) {
             setupErrorState(context, error);
           },
         );
       },
-      // This is a dummy widget, it doesn't have any UI.
       child: const SizedBox.shrink(),
+    );
+  }
+
+  void showSuccessDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Signup Successful'),
+          content: const SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Congratulations, you have signed up successfully!'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Continue'),
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.white,
+                backgroundColor: Colors.blue,
+                disabledForegroundColor: Colors.grey,
+              ),
+              onPressed: () {
+                context.pushNamed(Routes.loginScreen);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 
