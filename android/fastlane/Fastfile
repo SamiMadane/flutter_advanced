@@ -1,0 +1,24 @@
+# Command will be up my lane (in android path -> cd android) -> fastlane firebase_distribution
+default_platform(:android)
+
+platform :android do
+  desc "Lane for Android Firebase App Distribution"
+  # firebase_distribution is a custom lane name
+  lane :firebase_distribution do
+    # This two lines to clean the project and build the APK
+    sh "flutter clean"
+    sh "flutter build apk --release --flavor production --target lib/main_production.dart --no-tree-shake-icons"
+    firebase_app_distribution(
+        # Firebase App Distribution API Key (Firebase Project Settings -> Your Apps -> android: "App ID")
+        app: "1:174866560113:android:886a28062e53501367d7d0",
+        # This line to get the token (fastlane run get_firebase_cli_token) and refresh it.
+        # Now its secure in github actions.
+        firebase_cli_token: Env["FIREBASE_CLI_TOKEN"],
+        android_artifact_type: "APK",
+        # Path to the APK file (I write double backslashes because the path is in Windows firts backslash is for escape the second one is for the path)
+        android_artifact_path: "../build/app/outputs/flutter-apk/app-production-release.apk",
+        testers: "saja.madane57@gmail.com",
+        release_notes: "First Fastlane Firebase Distribution!"
+  )
+  end
+end
