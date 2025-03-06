@@ -18,7 +18,7 @@ platform :android do
         # Path to the APK file (I write double backslashes because the path is in Windows firts backslash is for escape the second one is for the path)
         android_artifact_path: "../build/app/outputs/flutter-apk/app-production-release.apk",
         testers: "saja.madane57@gmail.com",
-        release_notes: "First Fastlane Firebase Distribution!"
+        release_notes: "Testing something with github actions, trying to push directly from main branch",
   )
   end
 end
