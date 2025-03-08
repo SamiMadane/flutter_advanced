@@ -36,14 +36,7 @@ jobs:
         bundler-cache: true
         # like cd android in terminal (to access gemfile, bundlare & fastlane) setup ruby in android.
         working-directory: android
-    - name: Cache Bundler dependencies
-      uses: actions/cache@v2
-      with:
-        path: android/vendor/bundle
-        key: ${{ ubuntu-latest }}-bundler-${{ hashFiles('**/Gemfile.lock') }}
-        restore-keys: |
-          ${{ ubuntu-latest }}-bundler-
-          
+        
     - name: Build and Distribute App
       env:
       # FIREBASE_CLI_TOKEN -> secret name in github actions.
